@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "AnaSayfa";
+}
+
+<div class="text-center">
+    <input type="text" class="form-control" name="ID" id="ID" maxlength="50" placeholder="Kullanıcı Adı">
+    <input type="password" class="form-control" name="Pass" id="Pass" maxlength="50" placeholder="Şifre">
+    <button onclick="Giris()">Giris</button>
+</div>
+
+
+<script>
+    function Giris() {
+        //alert("Start2");
+        var ID = document.getElementById("ID").value;
+        var Pass = document.getElementById("Pass").value;
+        //alert(ID + Pass);
+
+        $.ajax({
+            type: 'GET',
+            data: jQuery.param({ ID: ID, Pass: Pass }),
+            // Note the difference in url (this works if you're actually in Index page)
+            url: '?handler=Giris',
+            success: function (data) {
+                //alert("ID: " + data);
+                //window.location.href = "http://www.w3schools.com";
+                window.location.href = data;
+            },
+            error: function (error) {
+                alert("Error: " + error);
+            }
+        })
+    }
+</script>

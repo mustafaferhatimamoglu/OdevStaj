@@ -1,0 +1,36 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<input type="text" class="form-control" name="ID" id="ID" maxlength="100">
+<input type="text" class="form-control" name="Pass" id="Pass" maxlength="100">
+<button onclick="Giris()">Giris</button>
+
+<script>
+    function Giris() {
+        //alert("Start2");
+        var ID = document.getElementById("ID").value;
+        var Pass = document.getElementById("Pass").value;
+        alert(ID + Pass);
+        
+        $.ajax({
+            type: 'GET',
+            data: jQuery.param({ ID: ID, Pass: Pass }),
+            // Note the difference in url (this works if you're actually in Index page)
+            url: '?handler=Giris',
+            success: function (data) {
+                //alert("ID: " + data);
+                //window.location.href = "http://www.w3schools.com";
+                window.location.href = data;
+            },
+            error: function (error) {
+                alert("Error: " + error);
+            }
+        })
+    }
+</script>
